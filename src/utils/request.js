@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -29,46 +29,21 @@ const service = axios.create({
 //   }
 // )
 
-// response interceptor
+// // 响应拦截器
 service.interceptors.response.use(
   response => {
-    const res = response.data
-
-    // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
-      Message({
-        message: res.message || 'Error',
-        type: 'error',
-        duration: 5 * 1000
-      })
-
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject(new Error(res.message || 'Error'))
+    // response响应回来的res(Promise类型？)
+    const { statusText, data } = response
+    if (statusText === 'OK') {
+      return data // 返回对象？
     } else {
-      return res
+      Message.error('请求失败') // 提示错误消息
+      return Promise.reject(new Error(statusText)) // 返回被拒绝的Promise
     }
   },
   error => {
-    console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
-    return Promise.reject(error)
+    Message.error(error.statusText) // 提示错误信息
+    return Promise.reject(error) // 返回执行错误 让当前的执行链跳出成功 直接进入 catch
   }
 )
-
 export default service
