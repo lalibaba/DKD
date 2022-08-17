@@ -22,8 +22,8 @@ export default {
       try {
         // 发送登录请求
         const res = await login(data)
-        console.log(res)
         context.commit('setToken', res.token)
+        return res
       } catch (e) { console.dir(e) }
     }
   }

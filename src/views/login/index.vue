@@ -58,7 +58,7 @@
           :key="passwordType"
           v-model="loginForm.code"
           placeholder="请输入验证码"
-          name="password"
+          name="code"
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="handleLogin"
@@ -80,7 +80,6 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
-
 export default {
   name: 'Login',
   data() {
@@ -138,16 +137,24 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate(async(valid) => {
         if (valid) {
           this.loading = true
-          try {
-            this.$store.dispatch('user/login', this.loginForm)
-            this.$router.push('/')
-            this.loading = false
-          } catch (e) { console.dir(e) }
+          const res = await this.$store.dispatch('user/login', this.loginForm)
+          console.log(res)
+          if (res.success) {
+            this.$message({
+              message: res.msg,
+              type: 'success'
+            })
+            this.$router.push({ path: this.redirect || '/' })
+          } else {
+            this.RandomFn()
+            this.$message.error(res.msg)
+          }
+          this.loading = false
         } else {
-          console.log('提交错误!!')
+          this.$message.error('验证错误!!')
           this.loading = false
         }
       })

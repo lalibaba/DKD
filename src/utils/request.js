@@ -29,16 +29,15 @@ const service = axios.create({
 //   }
 // )
 
-// // 响应拦截器
+// 响应拦截器
 service.interceptors.response.use(
   response => {
-    // response响应回来的res(Promise类型？)
-    const { statusText, data } = response
-    if (statusText === 'OK') {
+    const { status, data } = response
+    if (status === 200) {
       return data // 返回对象？
     } else {
       Message.error('请求失败') // 提示错误消息
-      return Promise.reject(new Error(statusText)) // 返回被拒绝的Promise
+      return Promise.reject(new Error(status)) // 返回被拒绝的Promise
     }
   },
   error => {
