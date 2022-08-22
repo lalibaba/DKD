@@ -136,6 +136,7 @@ export default {
         this.$refs.password.focus()
       })
     },
+    // 登录按钮
     handleLogin() {
       this.$refs.loginForm.validate(async(valid) => {
         if (valid) {
