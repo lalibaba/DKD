@@ -21,13 +21,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-
 export default {
   components: {
-    Breadcrumb,
-    Hamburger
   },
   computed: {
     ...mapGetters([
@@ -36,9 +31,7 @@ export default {
     ])
   },
   methods: {
-    toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
-    },
+
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
@@ -48,6 +41,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-dropdown-link{
+  color:#fff;
+  margin:0 10px;
+}
 .navbar {
   height: 50px;
   overflow: hidden;
@@ -107,13 +104,6 @@ export default {
         margin-top: 5px;
         position: relative;
 
-        .user-avatar {
-          cursor: pointer;
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-        }
-
         .el-icon-caret-bottom {
           cursor: pointer;
           position: absolute;
@@ -125,4 +115,12 @@ export default {
     }
   }
 }
+.user-avatar {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          vertical-align: middle;
+           margin-right: 10px;
+        }
 </style>

@@ -8,7 +8,6 @@
       auto-complete="on"
       label-position="left"
     >
-
       <div class="title-container">
         <h3 class="title"><img src="http://likede2-admin.itheima.net/img/logo.595745bd.png" alt=""></h3>
       </div>

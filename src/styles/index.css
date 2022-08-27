@@ -1,12 +1,12 @@
 :export {
-  menuText: #bfcbd9;
-  menuActiveText: #409EFF;
-  subMenuActiveText: #f4f4f5;
+  menuText: #000;
+  menuActiveText: #000;
+  subMenuActiveText: #000;
   menuBg: #304156;
   menuHover: #263445;
   subMenuBg: #1f2d3d;
   subMenuHover: #001528;
-  sideBarWidth: 210px;
+  sideBarWidth: 167px;
 }
 
 /* fade */
@@ -242,7 +242,7 @@
 
 #app .mobile .sidebar-container {
   transition: transform .28s;
-  width: 210px !important;
+  width: 167px !important;
 }
 
 #app .mobile.hideSidebar .sidebar-container {
