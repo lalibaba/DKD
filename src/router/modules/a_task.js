@@ -4,7 +4,6 @@ export default {
   path: '/task',
   name: 'task',
   component: Layout,
-  redirect: '/business',
   meta: { title: '工单管理', icon: 'gondan' },
   children: [{
     path: 'business',

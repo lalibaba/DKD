@@ -12,9 +12,22 @@
       <span class="el-dropdown-link">
         欢迎您，admin
       </span>
-      <span class="el-dropdown-link">
-        退出<i class="el-icon-arrow-down el-icon--right" />
-      </span>
+      <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
+          <div>
+            <span>退出</span>
+            <i class="el-icon-caret-bottom" />
+          </div>
+        </div>
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <router-link to="/">
+            <el-dropdown-item>首页</el-dropdown-item>
+          </router-link>
+          <el-dropdown-item divided @click.native="logout">
+            <span style="display: block" @click="logout">登出</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
   </div>
 </template>
@@ -99,9 +112,10 @@ export default {
 
     .avatar-container {
       margin-right: 30px;
-
+      .el-dropdown {
+        color:#fff
+      }
       .avatar-wrapper {
-        margin-top: 5px;
         position: relative;
 
         .el-icon-caret-bottom {

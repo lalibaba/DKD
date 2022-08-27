@@ -7,7 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 // 批量导入js文件
-const req = require.context('./', true, /\.js$/) // req.keys()得所有路径
+const req = require.context('./modules', true, /\.js$/) // req.keys()得所有路径
 const routerList = req.keys().map(ele => req(ele).default) // req.keys(url)得所有模块
 
 export const constantRoutes = [
@@ -32,8 +32,10 @@ export const constantRoutes = [
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '帝可得', icon: 'home' }
-    }]
+    }
+    ]
   },
+  ...routerList,
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

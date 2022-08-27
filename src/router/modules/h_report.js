@@ -1,13 +1,13 @@
 import Layout from '@/layout'
 
 export default {
-  path: '/Strategy',
+  path: '/report',
   component: Layout,
   children: [{
     path: '',
-    name: 'Strategy',
-    component: () => import('@/views/f_Strategy'),
-    meta: { title: '策略管理', icon: 'chelv' }
+    name: 'report',
+    component: () => import('@/views/h_report'),
+    meta: { title: '对账统计', icon: 'duizhang' }
   }]
 }
 

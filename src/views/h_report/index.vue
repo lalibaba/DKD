@@ -1,10 +1,10 @@
 <template>
-  <div>operation</div>
+  <div>order</div>
 </template>
 
 <script>
 export default { // 计算属性
-  name: 'Operation',
+  name: 'Order',
   components: {
   }, // 方法
   props: {
